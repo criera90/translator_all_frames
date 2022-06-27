@@ -1,4 +1,4 @@
-# translator_all_frames
+`# translator_all_frames
 ####-------------------------------------------------------------------####
 ####-------------------------- Important!! ----------------------------####
 #### Requires Biopython. To install Biopython refer to:                ####
@@ -21,3 +21,4 @@ Options:
   ¦   ¦   ¦   ¦   ¦   (do not need to specify, by defauld min_aa_len=10)
 
   ¦ -h                display this help and exit
+`
