@@ -137,7 +137,7 @@ def get_nt_seq(ORFs,nt_seq,aa_seq):
     return(nt_seqs_list)
  
 # remove old files
-files_list=['raw_translations.aa','ORFs.aa','ORFs.nt']
+files_list=['raw_translations.aa','ORFs.aa','ORFs.nt','ORFs_no_met.aa','ORFs_no_met.nt']
 def remove_old_files(files_list):
     for file_name in files_list:
         if os.path.isfile(file_name):
@@ -177,6 +177,7 @@ with open(fasta_file,'r') as fasta:
 
             # find the nucleotide sequence of each found ORF
             ORF_nt=get_nt_seq(ORFs[0],potential_ORFs[0],potential_ORFs[1])
+            ORF_nt_no_met=get_nt_seq(ORFs[1],potential_ORFs[0],potential_ORFs[1])
 
             desc = description + str('_frame_') + str(frame)
 
@@ -196,6 +197,21 @@ with open(fasta_file,'r') as fasta:
                     + str('_ORF_') + str(entry_counter) + str('_from_pos_') \
                     + str(entry_[1]) + str('_to_') + str(entry_[2])
                 with open('ORFs.nt', 'a') as files_nt:
+                    files_nt.write(make_SeqRecord(description,desc3,entry_[0]))
+
+            entry_counter = 0
+            for entry_ in ORF_nt_no_met:
+                entry_counter += 1
+                # ORF.aa
+                desc2 = desc + str('_ORF_') + str(entry_counter)
+                with open('ORFs_no_met.aa', 'a') as files_aa:
+                    files_aa.write(make_SeqRecord(description,desc2,entry_[3]))
+
+                # ORF.nt
+                desc3 = description + str('_frame_') + str(frame) \
+                    + str('_ORF_') + str(entry_counter) + str('_from_pos_') \
+                    + str(entry_[1]) + str('_to_') + str(entry_[2])
+                with open('ORFs_no_met.nt', 'a') as files_nt:
                     files_nt.write(make_SeqRecord(description,desc3,entry_[0]))
 
 
