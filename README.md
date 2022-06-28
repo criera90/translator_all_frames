@@ -15,10 +15,10 @@ Usage:
 python3 translator_all_frames.py -i <path_to_fasta_file> -m <min_aa_len>
 
 Options:
-  ¦ -i (directory)    path to a text file with fasta formated sequences
+    -i (directory)    path to a text file with fasta formated sequences
 
-  ¦ -m (integer)      min length of translated ORFs (in amino acids)
-  ¦   ¦   ¦   ¦   ¦   (do not need to specify, by defauld min_aa_len=10)
+    -m (integer)      min length of translated ORFs (in amino acids)
+                      (do not need to specify, by defauld min_aa_len=10)
 
-  ¦ -h                display this help and exit
+    -h                display this help and exit
 ```
