@@ -137,7 +137,19 @@ def get_nt_seq(ORFs,nt_seq,aa_seq):
     return(nt_seqs_list)
  
 # remove old files
-files_list=['raw_translations.aa','ORFs.aa','ORFs.nt','ORFs_no_met.aa','ORFs_no_met.nt']
+name=fasta_file.split('.')[0]
+print(name)
+raw_translations_faa=str(name+'_raw_translations.faa')
+ORFs_fna=str(name+'_ORFs.faa')
+ORFs_faa=str(name+'_ORFs.fna')
+ORFs_no_met_fna=str(name+'_ORFs_no_met.fna')
+ORFs_no_met_faa=str(name+'_ORFs_no_met.faa')
+
+files_list=[raw_translations_faa,
+            ORFs_fna,
+            ORFs_faa,
+            ORFs_no_met_faa,
+            ORFs_no_met_fna]
 def remove_old_files(files_list):
     for file_name in files_list:
         if os.path.isfile(file_name):
@@ -181,7 +193,7 @@ with open(fasta_file,'r') as fasta:
 
             desc = description + str('_frame_') + str(frame)
 
-            with open('raw_translations.aa', 'a') as files_aa:
+            with open(raw_translations_faa, 'a') as files_aa:
                 files_aa.write(make_SeqRecord(description,desc,potential_ORFs[1]))
 
             entry_counter = 0
@@ -189,14 +201,14 @@ with open(fasta_file,'r') as fasta:
                 entry_counter += 1
                 # ORF.aa
                 desc2 = desc + str('_ORF_') + str(entry_counter)
-                with open('ORFs.aa', 'a') as files_aa:
+                with open(ORFs_fna, 'a') as files_aa:
                     files_aa.write(make_SeqRecord(description,desc2,entry_[3]))
 
                 # ORF.nt
                 desc3 = description + str('_frame_') + str(frame) \
                     + str('_ORF_') + str(entry_counter) + str('_from_pos_') \
                     + str(entry_[1]) + str('_to_') + str(entry_[2])
-                with open('ORFs.nt', 'a') as files_nt:
+                with open(ORFs_fna, 'a') as files_nt:
                     files_nt.write(make_SeqRecord(description,desc3,entry_[0]))
 
             entry_counter = 0
@@ -204,14 +216,14 @@ with open(fasta_file,'r') as fasta:
                 entry_counter += 1
                 # ORF.aa
                 desc2 = desc + str('_ORF_') + str(entry_counter)
-                with open('ORFs_no_met.aa', 'a') as files_aa:
+                with open(ORFs_no_met_faa, 'a') as files_aa:
                     files_aa.write(make_SeqRecord(description,desc2,entry_[3]))
 
                 # ORF.nt
                 desc3 = description + str('_frame_') + str(frame) \
                     + str('_ORF_') + str(entry_counter) + str('_from_pos_') \
                     + str(entry_[1]) + str('_to_') + str(entry_[2])
-                with open('ORFs_no_met.nt', 'a') as files_nt:
+                with open(ORFs_no_met_fna, 'a') as files_nt:
                     files_nt.write(make_SeqRecord(description,desc3,entry_[0]))
 
 
