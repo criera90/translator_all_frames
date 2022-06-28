@@ -226,4 +226,19 @@ with open(fasta_file,'r') as fasta:
                 with open(ORFs_no_met_fna, 'a') as files_nt:
                     files_nt.write(make_SeqRecord(description,desc3,entry_[0]))
 
+'''
+This snippet searches among the raw_translation file and finds the sequences
+without stop codons "*"
 
+with open("ASVs_sul1_raw_translations.faa",'r') as fasta:
+    handle=SeqIO.parse(fasta,format='fasta')
+    # create six coding frames
+    for entry in handle:
+        if "*" in entry.seq:
+            pass
+        else:
+            with open('ASV_sul1_ORF_no_stop.aa', 'a') as files_nt:
+                files_nt.write(make_SeqRecord(str(entry.description),entry
+.description,entry.seq))
+
+'''
